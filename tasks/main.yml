@@ -1,0 +1,22 @@
+---
+- name: Installing vim packages using apt
+  become: true
+  apt:
+    pkg: "vim"
+    update_cache: yes
+    state: latest
+  when: ansible_distribution == 'Ubuntu'
+
+- name: Installing vim packages using yum
+  become: true
+  yum:
+    pkg: "vim"
+    update_cache: yes
+    state: latest
+  when: ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'
+
+- name: Installing vim packages using pacman
+  pacman:
+    name: "vim"
+    state: present
+  when: ansible_distribution == 'MacOSX'
